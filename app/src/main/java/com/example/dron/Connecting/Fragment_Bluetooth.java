@@ -103,6 +103,9 @@ public class Fragment_Bluetooth extends SubMenuFragment {
                 btn_bluetooth_search.setText("블루투스 검색");
                 //스캔중이면 스캔을 멈추게하고 스캔중이 아니라는 FALSE표시를 한다
                 if (mScanning) {
+                    //리스트뷰 초기화
+                    mLeDeviceListAdapter.clear();
+                    btn_bluetooth_search.setText("블루투스 검색");
                     Log.d("스캔중이구나?","그럼스캔을멈추자");
                     mBluetoothAdapter.stopLeScan(mLeScanCallback);
                     mScanning = false;

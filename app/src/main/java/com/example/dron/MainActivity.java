@@ -247,9 +247,11 @@ public class MainActivity extends AppCompatActivity {
 
         // issue : destroy 할때 연결된 디바이스 값도 초기화 해줘야함, 종료했다가 다시 실행시 바로 연결 됨
 
-        if(mGattUpdateReceiver != null) {
+        try {
             unregisterReceiver(mGattUpdateReceiver);
             unbindService(mServiceConnection);
+        }catch (Exception e){
+            Log.e("destroy","error");
         }
         mBluetoothLeService = null;
         DeviceScanActivity.mDeviceName = null;
