@@ -42,10 +42,8 @@ import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static DroneState drone, doot;
+    public static DroneState drone;
 
-
-    //수정수정수
     public static Context mContext;
     int StartByte = 0xC9, EndByte = 0xCA;
 

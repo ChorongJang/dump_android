@@ -28,6 +28,7 @@ public class Fragment_JoystickSetting extends SubMenuFragment {
 
     public void initFragmentComponent(View v) {
 
+        /*
         tog_joystick = (ToggleButton) v.findViewById(R.id.tog_joystick);
 
 
@@ -39,7 +40,7 @@ public class Fragment_JoystickSetting extends SubMenuFragment {
                                                     }
                                                 }
 
-        );
+        );*/
     }
 
     @Override

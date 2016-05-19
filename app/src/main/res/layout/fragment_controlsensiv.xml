@@ -4,7 +4,6 @@
     style="@style/FragmentFrame"
     android:id="@+id/layout_droneselect"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@color/menuBackground"
     android:orientation="vertical"
     android:weightSum="3.5">
 

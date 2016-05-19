@@ -1,23 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/FragmentFrame"
     android:id="@+id/layout_joysticksetting"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@color/menuBackground"
-    android:orientation="horizontal">
+    android:orientation="vertical"
+    android:weightSum="6">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
     <TextView
         style="@style/tv_alert_setting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/set_joystick_mode"
-        android:layout_margin="35dp"
-        />
+        android:text="@string/set_joystick_mode"/>
 
     <ToggleButton
-        android:id="@+id/tog_joystick"
+        android:id="@+id/tog_jmode1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="35dp"/>
+        android:layout_height="match_parent"
+        android:textOn="MODE 1"
+        android:textOff="MODE 1"
+        android:layout_marginLeft="40dp"/>
+
+    <ToggleButton
+        android:id="@+id/tog_jmode2"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textOn="MODE 2"
+        android:textOff="MODE 2"
+        android:layout_marginLeft="25dp"/>
+
+    <ToggleButton
+        android:id="@+id/tog_jmode3"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textOn="MODE 3"
+        android:textOff="MODE 3"
+        android:layout_marginLeft="25dp"/>
+    </LinearLayout>
+
+    <TextView
+        style="@style/tv_alert_setting"
+        android:id="@+id/tv_currentMode"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.7"
+        android:text="test"
+        android:paddingTop="20dp"
+        android:layout_gravity="center_horizontal"/>
+
+    
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3">
+
+        <LinearLayout
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/controller_right"
+            android:layout_alignParentLeft="true"/>
+
+        <LinearLayout
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/controller_right"
+            android:layout_alignParentRight="true"/>
+        
+    </RelativeLayout>
 
 </LinearLayout>
