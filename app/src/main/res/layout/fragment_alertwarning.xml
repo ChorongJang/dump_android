@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/FragmentFrame"
+    android:id="@+id/layout_droneselect"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/menuBackground"
+    android:orientation="vertical"
+    android:weightSum="5"
+    >
+
+    <LinearLayout
+        style="@style/Layout_alert_setting"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            style="@style/tv_alert_setting"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.5"
+            android:text="@string/alert_low_tension" />
+
+        <ToggleButton
+            style="@style/togg_alertMode"
+            android:id="@+id/tog_voltage_limit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <SeekBar
+            android:id="@+id/sbar_limit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:progress="3"
+            android:layout_gravity="center_vertical"
+            android:max="5"
+            android:paddingLeft="15dp"/>
+
+        <TextView
+            android:id="@+id/tv_limit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            android:layout_weight="1"
+            android:textColor="@color/colorWhite"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/Layout_alert_setting"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            style="@style/tv_alert_setting"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.5"
+            android:text="@string/alert_unusual_airframe" />
+
+        <ToggleButton
+            style="@style/togg_alertMode"
+            android:id="@+id/tog_malfunction_warning"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/Layout_alert_setting"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            style="@style/tv_alert_setting"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.5"
+            android:text="@string/alert_crash" />
+
+        <ToggleButton
+            style="@style/togg_alertMode"
+            android:id="@+id/tog_crash_warning"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/Layout_alert_setting"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+
+        <TextView
+            style="@style/tv_alert_setting"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.5"
+            android:text="@string/alert_restricted_area" />
+
+        <ToggleButton
+            style="@style/togg_alertMode"
+            android:id="@+id/tog_area_warning"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+</LinearLayout>

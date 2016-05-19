@@ -1,0 +1,94 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textViewStyle">@style/default_textcolor</item>
+        <item name="android:radioButtonStyle">@style/default_textcolor</item>
+    </style>
+
+    <style name="default_textcolor">
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!-- Main Activity Component Style -->
+    <style name="Layout_joystick" >
+        <item name="android:background">#00FF0000</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_marginRight">40dp</item>
+        <item name="android:layout_marginLeft">40dp</item>
+        <item name="android:layout_marginBottom">40dp</item>
+    </style>
+
+    <style name="Layout_mainBtn" >
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:layout_marginRight">30dp</item>
+        <item name="android:layout_marginLeft">30dp</item>
+        <item name="android:layout_marginTop">20dp</item>
+    </style>
+
+    <style name="Layout_indicator">
+        <item name="android:background">#000000</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="Layout_indicator_tv">
+        <item name="android:paddingLeft">10dp</item>
+    </style>
+
+    <style name="Layout_indicator_battery">
+        <item name="android:background">#000000</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginRight">2dp</item>
+    </style>
+    
+    <!-- Menu Fragment Style -->
+    <style name="FragmentFrame">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">70dp</item>
+        <item name="android:background">@color/menuBackground</item>
+    </style>
+    
+
+    <!-- Control Sensitivity Fragment Component Style -->
+    <style name="togg_sensitivityMode">
+        <item name="android:layout_marginBottom">25dp</item>
+        <item name="android:textSize">17dp</item>
+        <item name="android:textColor">@color/textClr_black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Alert & Warning Fragment Component Style -->
+
+    <style name="Layout_alert_setting">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:weightSum">8</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <style name="tv_alert_setting">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="togg_alertMode">
+        <item name="android:textOff">해제</item>
+        <item name="android:textOn">설정</item>
+        <item name="android:textColor">@color/textClr_black</item>
+    </style>
+
+</resources>

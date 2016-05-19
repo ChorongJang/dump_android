@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/menuBackground">
+
+    <LinearLayout
+        android:id="@+id/setGroup_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="3"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="50dp"
+            android:text="자동 보정"/>
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="조정"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/setGroup_1"
+        android:layout_marginTop="30dp"
+        android:weightSum="3"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="50dp"
+            android:text="수동 보정"/>
+
+        <RelativeLayout
+            android:layout_width="110dp"
+            android:layout_height="110dp">
+
+            <Button
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:text="상"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"/>
+
+            <Button
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:text="하"/>
+
+            <Button
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="35dp"
+                android:layout_alignParentLeft="true"
+                android:text="좌"/>
+
+            <Button
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="35dp"
+                android:layout_alignParentRight="true"
+                android:text="우"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

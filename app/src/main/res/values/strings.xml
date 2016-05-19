@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">Dron</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="title_activity_set_menu">SettingMenu_Act</string>
+    <string name="title_activity_connect_menu">ConnectingMenu_Act</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <!--  DeviceListActivity -->
+    <string name="scanning">scanning for devices...</string>
+    <string name="select_device">select a device to connect</string>
+    <string name="none_paired">No devices have been paired</string>
+    <string name="none_found">No devices found</string>
+    <string name="title_paired_devices">Paired Devices</string>
+    <string name="title_other_devices">Other Available Devices</string>
+    <string name="button_scan">Scan for devices</string>
+
+    <!-- Options Menu -->
+    <string name="secure_connect">Connect a device - Secure</string>
+    <string name="insecure_connect">Connect a device - Insecure</string>
+    <string name="discoverable">Make discoverable</string>
+
+    <!-- Alert & Warning Fragment -->
+    <string name="alert_low_tension">저전압 경고</string>
+    <string name="alert_unusual_airframe">기체이상 경고</string>
+    <string name="alert_crash">추락 경고</string>
+    <string name="alert_restricted_area">비행금지구역 경고</string>
+
+    <!--블루투스-->
+    <string name="ble_not_supported">BLE is not supported</string>
+    <string name="label_data">Data:</string>
+    <string name="label_device_address">Device address:</string>
+    <string name="label_state">State:</string>
+    <string name="no_data">No data</string>
+    <string name="connected">Connected</string>
+    <string name="disconnected">Disconnected</string>
+    <string name="title_devices">BLE Device Scan</string>
+    <string name="error_bluetooth_not_supported">Bluetooth not supported.</string>
+
+    <string name="unknown_device">Unknown device</string>
+    <string name="unknown_characteristic">Unknown characteristic</string>
+    <string name="unknown_service">Unknown service</string>
+
+    <!-- Menu items -->
+    <string name="menu_connect">Connect</string>
+    <string name="menu_disconnect">Disconnect</string>
+    <string name="menu_scan">Scan</string>
+    <string name="menu_stop">Stop</string>
+
+    <string name="set_joystick_mode">JoyStick Mode</string>
+</resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_joysticksetting"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/menuBackground"
+    android:orientation="horizontal">
+
+    <TextView
+        style="@style/tv_alert_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/set_joystick_mode"
+        android:layout_margin="35dp"
+        />
+
+    <ToggleButton
+        android:id="@+id/tog_joystick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="35dp"/>
+
+</LinearLayout>

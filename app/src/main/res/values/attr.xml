@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MenuButton">
+        <attr name="m_bg" format="reference|integer" />
+        <attr name="m_icon" format="reference|integer" />
+        <attr name="m_title" format="reference|string" />
+    </declare-styleable>
+</resources>

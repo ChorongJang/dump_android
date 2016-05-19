@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.dron">
+
+    <!--블루투스 권한 설정-->
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+    <!--오직 ble지원하는 기기에서만 가능하다고 명시-->
+    <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        >
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".Setting.SettingActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="@string/title_activity_set_menu"
+            android:screenOrientation="landscape"></activity>
+
+        <activity
+            android:name=".Connecting.ConnectingActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="@string/title_activity_connect_menu"
+            android:screenOrientation="landscape"></activity>
+
+        <activity
+            android:name=".Connecting.DeviceScanActivity"
+            android:theme="@android:style/Theme.Holo.Light"
+            android:screenOrientation="landscape">
+
+        </activity>
+
+
+        <!--<activity android:name=".DeviceControlActivity"/>-->
+        <service android:name=".Connecting.BluetoothLeService" android:enabled="true" android:screenOrientation="landscape"/>
+
+    </application>
+
+</manifest>

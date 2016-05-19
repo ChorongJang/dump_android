@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/FragmentFrame"
+    android:id="@+id/layout_droneselect"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/menuBackground"
+    android:orientation="vertical"
+    android:weightSum="3.5">
+
+    <ToggleButton
+        style="@style/togg_sensitivityMode"
+        android:id="@+id/tog_easyMode"
+        android:textOn="이지모드"
+        android:textOff="이지모드"
+        android:layout_width="130dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <ToggleButton
+        style="@style/togg_sensitivityMode"
+        android:id="@+id/tog_normalMode"
+        android:textOn="노말모드"
+        android:textOff="노말모드"
+        android:layout_width="130dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textColor="@color/textClr_black"/>
+
+    <ToggleButton
+        style="@style/togg_sensitivityMode"
+        android:id="@+id/tog_sportMode"
+        android:textOn="스포츠모드"
+        android:textOff="스포츠모드"
+        android:layout_width="130dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textColor="@color/textClr_black"/>
+
+</LinearLayout>

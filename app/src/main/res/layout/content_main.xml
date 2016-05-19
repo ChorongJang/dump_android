@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#906eff"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.dron.MainActivity"
+    tools:showIn="@layout/activity_main">
+
+    <!-- Menu Button -->
+    <Button
+        style="@style/Layout_mainBtn"
+        android:id="@+id/btn_conn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/connect"
+        android:layout_alignParentLeft="true"/>
+
+    <Button
+        style="@style/Layout_mainBtn"
+        android:id="@+id/btn_setting"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/setting"
+        android:layout_alignParentRight="true"/>
+
+    <!-- JOYSTICK -->
+    <RelativeLayout
+        style="@style/Layout_joystick"
+        android:id="@+id/joystick_left"
+        android:layout_width="230dp"
+        android:layout_height="230dp"
+        android:layout_alignParentLeft="true">
+        <ImageView
+            android:id="@+id/img_contLeft"
+            android:background="@drawable/controller_left"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_alignParentLeft="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="@style/Layout_joystick"
+        android:id="@+id/joystick_right"
+        android:layout_width="230dp"
+        android:layout_height="230dp"
+        android:layout_alignParentRight="true">
+        <ImageView
+            android:id="@+id/img_contRight"
+            android:background="@drawable/controller_right"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
+    <!-- Dron Condition Indicator -->
+    <LinearLayout
+        style="@style/Layout_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:weightSum="19">
+
+        <ImageView
+            android:src="@drawable/speed"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:paddingLeft="20dp"/>
+
+        <TextView
+            style="@style/Layout_indicator_tv"
+            android:id="@+id/speedText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"/>
+
+        <TextView
+            style="@style/Layout_indicator_tv"
+            android:id="@+id/dateText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2">
+
+            <View
+                android:background="@color/colorWhite"
+                android:layout_width="5dp"
+                android:layout_height="10dp"
+                android:layout_marginTop="11dp" />
+
+            <View
+                android:background="@color/colorWhite"
+                android:layout_width="33dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginLeft="3dp" />
+
+            <View
+                style="@style/Layout_indicator_battery"
+                android:id="@+id/view_battery1"
+                android:layout_width="8dp"
+                android:layout_height="12dp"
+                android:layout_marginLeft="5dp"/>
+
+            <View
+                style="@style/Layout_indicator_battery"
+                android:id="@+id/view_battery2"
+                android:layout_width="8dp"
+                android:layout_height="12dp"
+                android:layout_toRightOf="@+id/view_battery1"/>
+
+            <View
+                style="@style/Layout_indicator_battery"
+                android:id="@+id/view_battery3"
+                android:layout_width="8dp"
+                android:layout_height="12dp"
+                android:layout_toRightOf="@+id/view_battery2"/>
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="2dp"
+            android:src="@drawable/compass"
+            android:layout_weight="0.7"/>
+
+        <TextView
+            style="@style/Layout_indicator_tv"
+            android:id="@+id/directionText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"/>
+    </LinearLayout>
+
+</RelativeLayout>
