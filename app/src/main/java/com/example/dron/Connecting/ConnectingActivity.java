@@ -93,7 +93,7 @@ public class ConnectingActivity extends AppCompatActivity implements Fragment_Co
         this.overridePendingTransition(0, 0);
 
         if (MainActivity.mBluetoothLeService != null) {
-            final boolean result = MainActivity.mBluetoothLeService.connect(DeviceScanActivity.mDeviceAddress);
+            final boolean result = MainActivity.mBluetoothLeService.connect(Fragment_Bluetooth.mDeviceAddress);
             Log.d("연결결과는", "Connect request result=" + result);
         }
         super.onResume();
@@ -219,12 +219,12 @@ public class ConnectingActivity extends AppCompatActivity implements Fragment_Co
         Toast.makeText(this, "준비중입니다.", Toast.LENGTH_SHORT).show();
     }
 
-    private void onClickBluetooth(){
-
-        DeviceScanActivity deviceScanActivity = new DeviceScanActivity();
-        Intent intent = new Intent(this, DeviceScanActivity.class);
-        startActivity(intent);
-    }
+//    private void onClickBluetooth(){
+//
+//        DeviceScanActivity deviceScanActivity = new DeviceScanActivity();
+//        Intent intent = new Intent(this, DeviceScanActivity.class);
+//        startActivity(intent);
+//    }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
