@@ -219,13 +219,6 @@ public class ConnectingActivity extends AppCompatActivity implements Fragment_Co
         Toast.makeText(this, "준비중입니다.", Toast.LENGTH_SHORT).show();
     }
 
-//    private void onClickBluetooth(){
-//
-//        DeviceScanActivity deviceScanActivity = new DeviceScanActivity();
-//        Intent intent = new Intent(this, DeviceScanActivity.class);
-//        startActivity(intent);
-//    }
-
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
     }
