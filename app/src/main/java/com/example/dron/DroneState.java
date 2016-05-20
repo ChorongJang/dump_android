@@ -7,18 +7,23 @@ public class DroneState {
 
     private int   controlSensitivity;
     private AlertState alertState;
+    private int joystickMode;
 
     public DroneState(){
 
         alertState = new AlertState(false, false, false, false,5);
         controlSensitivity = 1;
 
+        joystickMode = 1;
     }
 
     public void setControlSensitivity(int _sensitivity){
         this.controlSensitivity = _sensitivity;
     }
 
+    public void setJoystickMode(int _mode){
+        this.joystickMode = _mode;
+    }
 
     public void setAlertState(int _value,  boolean _state){
         alertState.mode[_value] = _state;
@@ -31,6 +36,10 @@ public class DroneState {
 
     public int getControlSensitivity(){
         return controlSensitivity;
+    }
+
+    public int getJoystickMode(){
+       return this.joystickMode;
     }
 
     public boolean[] getAlertState(){
