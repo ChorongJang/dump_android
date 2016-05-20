@@ -29,6 +29,7 @@ import com.example.dron.Component.View_JoyStick;
 import com.example.dron.Connecting.BluetoothLeService;
 import com.example.dron.Connecting.ConnectingActivity;
 import com.example.dron.Connecting.DeviceScanActivity;
+import com.example.dron.Connecting.Fragment_Bluetooth;
 import com.example.dron.Setting.SettingActivity;
 
 import java.text.SimpleDateFormat;
@@ -84,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
             // Automatically connects to the device upon successful start-up initialization.
-            mBluetoothLeService.connect(DeviceScanActivity.mDeviceAddress);
+            mBluetoothLeService.connect(Fragment_Bluetooth.mDeviceAddress);
         }
 
         @Override
@@ -208,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         if (mBluetoothLeService != null) {
-            final boolean result = mBluetoothLeService.connect(DeviceScanActivity.mDeviceAddress);
+            final boolean result = mBluetoothLeService.connect(Fragment_Bluetooth.mDeviceAddress);
             Log.d("연결결과는", "Connect request result=" + result);
         }
 
@@ -230,7 +231,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        nTimer.cancel();
+        //블루투스 연결되었을 때(드론과 연결 되었을 때)만 작업을 수행하도록 함
+        if(Fragment_Bluetooth.mDeviceAddress != null) nTimer.cancel();
     }
 
     @Override
@@ -238,7 +240,8 @@ public class MainActivity extends AppCompatActivity {
         this.overridePendingTransition(0, 0);
         super.onResume();
 
-        setSendDataTask();
+        //블루투스 연결되었을 때(드론과 연결 되었을 때)만 작업을 수행하도록 함
+        if(Fragment_Bluetooth.mDeviceAddress != null)  setSendDataTask();
     }
 
     @Override
@@ -254,10 +257,11 @@ public class MainActivity extends AppCompatActivity {
             Log.e("destroy","error");
         }
         mBluetoothLeService = null;
-        DeviceScanActivity.mDeviceName = null;
-        DeviceScanActivity.mDeviceAddress = null;
+        Fragment_Bluetooth.mDeviceName = null;
+        Fragment_Bluetooth.mDeviceAddress = null;
 
-        nTimer.cancel();
+        //블루투스 연결되었을 때(드론과 연결 되었을 때)만 작업을 수행하도록 함
+        if(Fragment_Bluetooth.mDeviceAddress != null) nTimer.cancel();
     }
 
     private void setJoyStick(){
