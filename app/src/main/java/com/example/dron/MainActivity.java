@@ -260,7 +260,8 @@ public class MainActivity extends AppCompatActivity {
         Fragment_Bluetooth.mDeviceName = null;
         Fragment_Bluetooth.mDeviceAddress = null;
 
-        nTimer.cancel();
+        //블루투스 연결되었을 때(드론과 연결 되었을 때)만 작업을 수행하도록 함
+        if(Fragment_Bluetooth.mDeviceAddress != null) nTimer.cancel();
     }
 
     private void setJoyStick(){
