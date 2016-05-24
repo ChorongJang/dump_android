@@ -40,13 +40,6 @@
             android:label="@string/title_activity_connect_menu"
             android:screenOrientation="landscape"></activity>
 
-        <activity
-            android:name=".Connecting.DeviceScanActivity"
-            android:theme="@android:style/Theme.Holo.Light"
-            android:screenOrientation="landscape">
-
-        </activity>
-
 
         <!--<activity android:name=".DeviceControlActivity"/>-->
         <service android:name=".Connecting.BluetoothLeService" android:enabled="true" android:screenOrientation="landscape"/>

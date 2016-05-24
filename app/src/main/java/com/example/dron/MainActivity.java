@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -22,19 +21,15 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.example.dron.Component.DronIndicator;
 import com.example.dron.Component.View_JoyStick;
 import com.example.dron.Connecting.BluetoothLeService;
 import com.example.dron.Connecting.ConnectingActivity;
-import com.example.dron.Connecting.DeviceScanActivity;
 import com.example.dron.Connecting.Fragment_Bluetooth;
 import com.example.dron.Setting.SettingActivity;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
