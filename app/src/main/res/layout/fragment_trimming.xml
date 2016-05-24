@@ -94,44 +94,46 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:weightSum="4"
             android:orientation="vertical"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:paddingLeft="20dp">
 
             <TextView
                 style="@style/tv_mtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="미세 조정 단위"/>
+                android:layout_weight="1"
+                android:text="미세 조정 단위" />
 
             <RadioGroup
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="15dp"
+                android:layout_weight="1"
                 android:orientation="horizontal">
 
                 <RadioButton
                     android:id="@+id/radio_value1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="asddsa"
-                    android:paddingRight="20dp"/>
+                    android:textColor="@color/colorWhite"
+                    android:text="0.05"
+                    android:paddingRight="15dp"/>
 
                 <RadioButton
                     android:id="@+id/radio_value2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingRight="20dp"
-                    android:text="sdsd"/>
+                    android:paddingRight="15dp"
+                    android:textColor="@color/colorWhite"
+                    android:text="0.1"/>
 
                 <RadioButton
                     android:id="@+id/radio_value3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingRight="10dp"
-                    android:text="sdsd"/>
-
-
+                    android:textColor="@color/colorWhite"
+                    android:text="0.5"/>
             </RadioGroup>
 
 
@@ -141,7 +143,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:text="test"
-                android:paddingTop="25dp"/>
+                android:layout_weight="1"/>
 
             <TextView
                 android:id="@+id/tv_pitch"
@@ -149,7 +151,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:text="test"
-                android:paddingTop="10dp"/>
+                android:layout_weight="1"/>
         </LinearLayout>
 
     </LinearLayout>

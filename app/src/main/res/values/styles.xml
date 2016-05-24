@@ -4,15 +4,14 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorAccent</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:textViewStyle">@style/default_textcolor</item>
-        <item name="android:radioButtonStyle">@style/default_textcolor</item>
+        <item name="android:textViewStyle">@style/default_textStyle</item>
     </style>
 
-    <style name="default_textcolor">
-        <item name="android:textColor">#FFFFFF</item>
+    <style name="default_textStyle">
         <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/colorWhite</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
