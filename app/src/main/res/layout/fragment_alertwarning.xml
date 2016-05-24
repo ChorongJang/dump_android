@@ -5,10 +5,8 @@
     android:id="@+id/layout_droneselect"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/menuBackground"
     android:orientation="vertical"
-    android:weightSum="5"
-    >
+    android:weightSum="5">
 
     <LinearLayout
         style="@style/Layout_alert_setting"
@@ -17,7 +15,7 @@
         android:layout_weight="1">
 
         <TextView
-            style="@style/tv_alert_setting"
+            style="@style/tv_mtitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2.5"
@@ -56,7 +54,7 @@
         android:layout_weight="1">
 
         <TextView
-            style="@style/tv_alert_setting"
+            style="@style/tv_mtitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2.5"
@@ -78,7 +76,7 @@
         android:layout_weight="1">
 
         <TextView
-            style="@style/tv_alert_setting"
+            style="@style/tv_mtitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2.5"
@@ -101,7 +99,7 @@
         >
 
         <TextView
-            style="@style/tv_alert_setting"
+            style="@style/tv_mtitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2.5"

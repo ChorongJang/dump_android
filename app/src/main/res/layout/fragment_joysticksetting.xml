@@ -14,7 +14,7 @@
         android:orientation="horizontal">
 
     <TextView
-        style="@style/tv_alert_setting"
+        style="@style/tv_mtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/set_joystick_mode"/>
@@ -45,7 +45,7 @@
     </LinearLayout>
 
     <TextView
-        style="@style/tv_alert_setting"
+        style="@style/tv_mtitle"
         android:id="@+id/tv_jmode"
         android:layout_width="wrap_content"
         android:layout_height="0dp"

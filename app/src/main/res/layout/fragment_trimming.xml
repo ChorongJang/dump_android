@@ -1,48 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@color/menuBackground">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/FragmentFrame"
+    android:orientation="vertical"
+    android:weightSum="3"
+    android:layout_width="match_parent" android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/setGroup_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="3"
-        android:gravity="center">
+        android:gravity="start"
+        android:paddingTop="30dp"
+        android:layout_weight="1">
 
         <TextView
+            style="@style/tv_mtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="50dp"
             android:text="자동 보정"/>
 
         <Button
+            android:id="@+id/btn_auto"
             android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="조정"/>
+            android:layout_height="30dp"
+            android:text="보정하기"
+            android:background="@color/colorWhite"/>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/setGroup_1"
         android:layout_marginTop="30dp"
-        android:weightSum="3"
-        android:gravity="center">
+        android:layout_weight="2"
+        android:weightSum="2"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
         <TextView
+            style="@style/tv_mtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="50dp"
             android:text="수동 보정"/>
+
 
         <RelativeLayout
             android:layout_width="110dp"
             android:layout_height="110dp">
 
             <Button
+                android:id="@+id/btn_handUP"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:text="상"
@@ -50,6 +63,7 @@
                 android:layout_centerHorizontal="true"/>
 
             <Button
+                android:id="@+id/btn_handDW"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_alignParentBottom="true"
@@ -57,6 +71,7 @@
                 android:text="하"/>
 
             <Button
+                android:id="@+id/btn_handLF"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="35dp"
@@ -64,6 +79,7 @@
                 android:text="좌"/>
 
             <Button
+                android:id="@+id/btn_handRG"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="35dp"
@@ -71,5 +87,72 @@
                 android:text="우"/>
 
         </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:paddingLeft="20dp">
+
+            <TextView
+                style="@style/tv_mtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="미세 조정 단위"/>
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radio_value1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="asddsa"
+                    android:paddingRight="20dp"/>
+
+                <RadioButton
+                    android:id="@+id/radio_value2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="20dp"
+                    android:text="sdsd"/>
+
+                <RadioButton
+                    android:id="@+id/radio_value3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="10dp"
+                    android:text="sdsd"/>
+
+
+            </RadioGroup>
+
+
+            <TextView
+                android:id="@+id/tv_roll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="test"
+                android:paddingTop="25dp"/>
+
+            <TextView
+                android:id="@+id/tv_pitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="test"
+                android:paddingTop="10dp"/>
+        </LinearLayout>
+
     </LinearLayout>
-</RelativeLayout>
+
+
+</LinearLayout>

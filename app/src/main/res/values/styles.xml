@@ -12,6 +12,7 @@
 
     <style name="default_textcolor">
         <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">17sp</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -62,6 +63,8 @@
         <item name="android:paddingLeft">70dp</item>
         <item name="android:paddingRight">70dp</item>
         <item name="android:background">@color/menuBackground</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
     
 
@@ -81,9 +84,8 @@
         <item name="android:layout_gravity">center_vertical</item>
     </style>
 
-    <style name="tv_alert_setting">
+    <style name="tv_mtitle">
         <item name="android:textStyle">bold</item>
-        <item name="android:textSize">17sp</item>
     </style>
 
     <style name="togg_alertMode">
