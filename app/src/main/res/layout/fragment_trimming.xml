@@ -3,7 +3,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/FragmentFrame"
     android:orientation="vertical"
-    android:weightSum="3"
+    android:weightSum="4"
+    android:background="#05ff00"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <LinearLayout
@@ -33,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:layout_weight="2"
+        android:layout_weight="3"
         android:weightSum="2"
         android:orientation="horizontal">
 

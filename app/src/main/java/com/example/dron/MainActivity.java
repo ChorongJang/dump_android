@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -202,13 +203,24 @@ public class MainActivity extends AppCompatActivity {
 
         mContext = this;
 
-
         if (mBluetoothLeService != null) {
             final boolean result = mBluetoothLeService.connect(Fragment_Bluetooth.mDeviceAddress);
             Log.d("연결결과는", "Connect request result=" + result);
         }
 
+        setDronestate();
         initView();
+    }
+
+    public void setDronestate(){
+
+        String sfName = "DroneStateFile";
+        SharedPreferences mPref;
+
+        mPref = getSharedPreferences(sfName,0);
+        drone = new DroneState(mPref);
+
+        drone.getJoystickMode();
     }
 
     public void registerble(){
@@ -220,8 +232,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void disconnectDevice(){
 
-    }
 
+    }
 
     @Override
     protected void onPause() {
@@ -291,8 +303,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView(){
-
-        drone = new DroneState();
 
         indicator = new DronIndicator(this);
         btn_conn = (Button) findViewById(R.id.btn_conn);
