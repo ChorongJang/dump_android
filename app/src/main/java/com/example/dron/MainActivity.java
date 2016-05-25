@@ -252,6 +252,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+        drone.saveDroneState();
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
 

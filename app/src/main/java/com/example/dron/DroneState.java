@@ -42,7 +42,10 @@ public class DroneState {
         editor.putBoolean(stateName[4], alertState.mode[2]);
         editor.putBoolean(stateName[5], alertState.mode[3]);
         editor.putInt(stateName[6], alertState.limit);
+
+        editor.commit();
     }
+
     public void setControlSensitivity(int _sensitivity){
         this.controlSensitivity = _sensitivity;
     }
