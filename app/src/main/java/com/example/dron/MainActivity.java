@@ -100,6 +100,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
 
+        tTimer.cancel();
+
         // issue : destroy 할때 연결된 디바이스 값도 초기화 해줘야함, 종료했다가 다시 실행시 바로 연결 됨
 
         try {
