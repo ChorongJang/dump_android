@@ -61,7 +61,10 @@
         style="@style/Layout_indicator"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:weightSum="19">
+        android:weightSum="20"
+        android:orientation="horizontal"
+        android:background="#ff1600"
+        android:gravity="left">
 
         <ImageView
             android:src="@drawable/speed"
@@ -78,53 +81,19 @@
             android:layout_weight="3"/>
 
         <TextView
-            style="@style/Layout_indicator_tv"
             android:id="@+id/dateText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="7" />
+            android:layout_weight="5" />
 
-        <!--
-        <RelativeLayout
+        <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2">
+            android:layout_weight="3.5"
+            android:background="#c9e873"
+            android:text="START"
+            />
 
-            <View
-                android:background="@color/colorWhite"
-                android:layout_width="5dp"
-                android:layout_height="10dp"
-                android:layout_marginTop="11dp" />
-
-            <View
-                android:background="@color/colorWhite"
-                android:layout_width="33dp"
-                android:layout_height="18dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginLeft="3dp" />
-
-            <View
-                style="@style/Layout_indicator_battery"
-                android:id="@+id/view_battery1"
-                android:layout_width="8dp"
-                android:layout_height="12dp"
-                android:layout_marginLeft="5dp"/>
-
-            <View
-                style="@style/Layout_indicator_battery"
-                android:id="@+id/view_battery2"
-                android:layout_width="8dp"
-                android:layout_height="12dp"
-                android:layout_toRightOf="@+id/view_battery1"/>
-
-            <View
-                style="@style/Layout_indicator_battery"
-                android:id="@+id/view_battery3"
-                android:layout_width="8dp"
-                android:layout_height="12dp"
-                android:layout_toRightOf="@+id/view_battery2"/>
-        </RelativeLayout>
-        -->
         <ImageView
             android:layout_width="0dp"
             android:layout_height="24dp"
