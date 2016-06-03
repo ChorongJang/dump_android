@@ -95,7 +95,6 @@ public class Fragment_Trimming extends SubMenuFragment {
                     tv_pitch.setText("ROLL TRIM     " + dformat.format(rValue));
                     break;
 
-
             }
         }
     };

@@ -15,7 +15,6 @@ import java.util.Date;
 public class DronIndicator {
 
     TextView speedText, dateText, directionText;
-    View     view_battery1, view_battery2, view_battery3;
     Activity mActivity;
 
     public DronIndicator(Activity activity){
@@ -29,17 +28,12 @@ public class DronIndicator {
         dateText      = (TextView) mActivity.findViewById(R.id.dateText);
         directionText = (TextView) mActivity.findViewById(R.id.directionText);
 
-        view_battery1 = mActivity.findViewById(R.id.view_battery1);
-        view_battery2 = mActivity.findViewById(R.id.view_battery2);
-        view_battery3 = mActivity.findViewById(R.id.view_battery3);
     }
 
     public void setDronIndicator(String _speed, String _battery, String _direction){
 
         speedText.setText(_speed);
         directionText.setText(_direction);
-
-        drawBatteryState(Integer.parseInt(_battery));
     }
 
     public void setCurrentTime(){
@@ -48,35 +42,4 @@ public class DronIndicator {
         dateText.setText(strResult);
     }
 
-    private void drawBatteryState(int _battery){
-
-        switch (_battery){
-            case 0:
-                view_battery1.setVisibility(View.INVISIBLE);
-                view_battery2.setVisibility(View.INVISIBLE);
-                view_battery3.setVisibility(View.INVISIBLE);
-                break;
-
-            case 1:
-                view_battery1.setVisibility(View.VISIBLE);
-                view_battery2.setVisibility(View.INVISIBLE);
-                view_battery3.setVisibility(View.INVISIBLE);
-                break;
-
-            case 2:
-                view_battery1.setVisibility(View.VISIBLE);
-                view_battery2.setVisibility(View.VISIBLE);
-                view_battery3.setVisibility(View.INVISIBLE);
-                break;
-
-            case 3:
-                view_battery1.setVisibility(View.VISIBLE);
-                view_battery2.setVisibility(View.VISIBLE);
-                view_battery3.setVisibility(View.VISIBLE);
-                break;
-
-            default:
-                break;
-        }
-    }
 }

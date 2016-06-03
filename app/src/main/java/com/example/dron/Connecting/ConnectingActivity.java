@@ -159,7 +159,6 @@ public class ConnectingActivity extends AppCompatActivity implements Fragment_Co
         if(fragment_count != 0) {
             manager.popBackStack();
             tv_title.setText(title);
-            btn_save.setVisibility(View.INVISIBLE);
         }
         else finish();
     }
