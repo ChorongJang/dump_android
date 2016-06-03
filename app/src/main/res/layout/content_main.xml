@@ -61,9 +61,8 @@
         style="@style/Layout_indicator"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:weightSum="20"
+        android:weightSum="15"
         android:orientation="horizontal"
-        android:background="#ff1600"
         android:gravity="left">
 
         <ImageView
@@ -74,39 +73,64 @@
             android:paddingLeft="20dp"/>
 
         <TextView
-            style="@style/Layout_indicator_tv"
             android:id="@+id/speedText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"/>
+            android:layout_weight="1.6"
+            android:textSize="15sp"/>
 
         <TextView
             android:id="@+id/dateText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="5" />
+            android:layout_weight="3.2"
+            android:textSize="15sp"/>
 
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3.5"
+            android:layout_weight="2.5"
             android:background="#c9e873"
             android:text="START"
             />
 
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"/>
+
         <ImageView
             android:layout_width="0dp"
-            android:layout_height="24dp"
-            android:layout_marginTop="2dp"
-            android:src="@drawable/compass"
-            android:layout_weight="0.7"/>
+            android:layout_height="match_parent"
+            android:paddingTop="4dp"
+            android:src="@drawable/main_icon_gps"
+            android:layout_weight="1"/>
 
         <TextView
-            style="@style/Layout_indicator_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.9"
+            android:text="GPS "/>
+
+        <TextView
+            android:id="@+id/gpsText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:text="ON"
+            android:textColor="#7de877"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"/>
+
+        <TextView
             android:id="@+id/directionText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="4"/>
+            android:layout_weight="4"
+            android:textSize="15sp"/>
     </LinearLayout>
 
 </RelativeLayout>

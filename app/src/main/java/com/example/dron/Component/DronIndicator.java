@@ -3,6 +3,7 @@ package com.example.dron.Component;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -39,6 +40,7 @@ public class DronIndicator {
     public void setCurrentTime(){
         SimpleDateFormat sdfNow = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String strResult = sdfNow.format(new Date(System.currentTimeMillis()));
+        Log.d("timt",strResult);
         dateText.setText(strResult);
     }
 

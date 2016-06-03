@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
     static public boolean joystick_mode;
 
-    Timer nTimer;
+    Timer nTimer, tTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,19 +75,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         this.overridePendingTransition(0, 0);
         super.onResume();
 
         //블루투스 연결되었을 때(드론과 연결 되었을 때)만 작업을 수행하도록 함
-        if(Fragment_Bluetooth.mDeviceAddress != null)  setSendDataTask();
+        if (Fragment_Bluetooth.mDeviceAddress != null) setSendDataTask();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         //블루투스 연결되었을 때(드론과 연결 되었을 때)만 작업을 수행하도록 함
-        if(Fragment_Bluetooth.mDeviceAddress != null) nTimer.cancel();
+        if (Fragment_Bluetooth.mDeviceAddress != null) nTimer.cancel();
     }
 
     @Override
@@ -105,15 +105,15 @@ public class MainActivity extends AppCompatActivity {
         try {
             unregisterReceiver(mGattUpdateReceiver);
             unbindService(mServiceConnection);
-        }catch (Exception e){
-            Log.e("destroy","error");
+        } catch (Exception e) {
+            Log.e("destroy", "error");
         }
         mBluetoothLeService = null;
         Fragment_Bluetooth.mDeviceName = null;
         Fragment_Bluetooth.mDeviceAddress = null;
 
         //블루투스 연결되었을 때(드론과 연결 되었을 때)만 작업을 수행하도록 함
-        if(Fragment_Bluetooth.mDeviceAddress != null) nTimer.cancel();
+        if (Fragment_Bluetooth.mDeviceAddress != null) nTimer.cancel();
     }
 
 
@@ -192,9 +192,9 @@ public class MainActivity extends AppCompatActivity {
         Log.d("데이터 왔냐..그럼 텍스트 바꿔라", data);
         if (data != null) {
 
-           // if(rStartByte)
+            // if(rStartByte)
 
-            indicator.setDronIndicator(data,"2",data);
+            indicator.setDronIndicator(data, "2", data);
         }
     }
 
@@ -254,18 +254,18 @@ public class MainActivity extends AppCompatActivity {
         return mWritableCharacteristics.size();
     }
 
-    private String GetDevicesUUID(Context mContext){
+    private String GetDevicesUUID(Context mContext) {
         final TelephonyManager tm = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
         final String tmDevice, tmSerial, androidId;
         tmDevice = "" + tm.getDeviceId();
         tmSerial = "" + tm.getSimSerialNumber();
         androidId = "" + android.provider.Settings.Secure.getString(getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
-        UUID deviceUuid = new UUID(androidId.hashCode(), ((long)tmDevice.hashCode() << 32) | tmSerial.hashCode());
+        UUID deviceUuid = new UUID(androidId.hashCode(), ((long) tmDevice.hashCode() << 32) | tmSerial.hashCode());
         String deviceId = deviceUuid.toString();
         return deviceId;
     }
 
-    public void registerble(){
+    public void registerble() {
 
         Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
         bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
@@ -273,18 +273,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void setDronestate(){
+    public void setDronestate() {
 
         String sfName = "DroneStateFile";
         SharedPreferences mPref;
 
-        mPref = getSharedPreferences(sfName,0);
+        mPref = getSharedPreferences(sfName, 0);
         drone = new DroneState(mPref);
 
         drone.getJoystickMode();
     }
 
-    private void initView(){
+    private void initView() {
 
         indicator = new DronIndicator(this);
         btn_conn = (Button) findViewById(R.id.btn_conn);
@@ -293,12 +293,16 @@ public class MainActivity extends AppCompatActivity {
         initJoyStick();
         setBtnEvent();
         indicator.setDronIndicator("35KM/H", "3", "N38.26 E134.23");
+
+        TimeTask timeTask = new TimeTask();
+        tTimer = new Timer();
+        tTimer.schedule(timeTask, 500, 100);
     }
 
-    private void initJoyStick(){
+    private void initJoyStick() {
 
-        layout_js_left = (RelativeLayout)findViewById(R.id.joystick_left);
-        layout_js_right = (RelativeLayout)findViewById(R.id.joystick_right);
+        layout_js_left = (RelativeLayout) findViewById(R.id.joystick_left);
+        layout_js_right = (RelativeLayout) findViewById(R.id.joystick_right);
 
         js_left = new View_JoyStick(getApplicationContext(), layout_js_left, R.drawable.image_button);
         js_right = new View_JoyStick(getApplicationContext(), layout_js_right, R.drawable.image_button);
@@ -306,7 +310,7 @@ public class MainActivity extends AppCompatActivity {
         setJoyStick();
     }
 
-    private void setJoyStick(){
+    private void setJoyStick() {
 
         joystick_mode = true;
 
@@ -337,7 +341,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void setSendDataTask(){
+    private void setSendDataTask() {
         DroneTask droneTask = new DroneTask();
         nTimer = new Timer();
         nTimer.schedule(droneTask, 500, 100);
@@ -388,18 +392,17 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void setJoystickMode(boolean _mode){
+    public void setJoystickMode(boolean _mode) {
 
-        ImageView img_right = (ImageView)this.findViewById(R.id.img_contRight);
-        ImageView img_left = (ImageView)this.findViewById(R.id.img_contRight);
+        ImageView img_right = (ImageView) this.findViewById(R.id.img_contRight);
+        ImageView img_left = (ImageView) this.findViewById(R.id.img_contRight);
 
         joystick_mode = _mode;
 
-        if(joystick_mode) {
+        if (joystick_mode) {
             img_right.setImageResource(R.drawable.controller_right);
             img_left.setImageResource(R.drawable.controller_left);
-        }
-        else{
+        } else {
 
             img_right.setImageResource(R.drawable.controller_left);
             img_left.setImageResource(R.drawable.controller_right);
@@ -423,25 +426,31 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void run() {
 
-            if(mBluetoothLeService == null) return;
+            if (mBluetoothLeService == null) return;
 
-            if(MainActivity.joystick_mode){
+            if (MainActivity.joystick_mode) {
                 sendText = StartByte + "," + js_left.getX() + "," + js_left.getY()
                         + "," + js_right.getX() + "," + js_right.getY() + "," + EndByte;
             }
-            else{
-                sendText = StartByte + "," +  js_right.getX() + "," + js_right.getY() +
-                        js_left.getX() + "," + js_left.getY() + "," +"," + EndByte;
-            }
-            Log.d("보내는 메시지는:", sendText);
-            mBluetoothLeService.write(mDefaultChar, sendText.getBytes());
+            sendText = StartByte + "," + js_right.getX() + "," + js_right.getY() +
+                    js_left.getX() + "," + js_left.getY() + "," + "," + EndByte;
+
+
+        Log.d("보내는 메시지는:",sendText);
+        mBluetoothLeService.write(mDefaultChar,sendText.getBytes());
         }
     };
 
     class DroneTask extends TimerTask{
         public void run(){
-            mHandler.post(mUpdateTimeTask);
+
             nHandler.post(nSendJoyStickTask);
+        }
+    }
+
+    class TimeTask extends TimerTask{
+        public void run(){
+            mHandler.post(mUpdateTimeTask);
         }
     }
 
