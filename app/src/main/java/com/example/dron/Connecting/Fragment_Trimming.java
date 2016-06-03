@@ -25,7 +25,7 @@ public class Fragment_Trimming extends SubMenuFragment {
     String patten = "#####.##";
     DecimalFormat dformat = new DecimalFormat(patten);
 
-    double cValue = 0.05, pValue = 0.5, rValue = 1.2;
+    double cValue = 0.05, pValue = 1.2, rValue = 0.5;
 
     @Nullable
     @Override
@@ -65,6 +65,12 @@ public class Fragment_Trimming extends SubMenuFragment {
             b.setOnClickListener(mClickListener);
 
         }
+
+        for (Button b:radio_trim) {
+
+            b.setOnClickListener(mClickListener1);
+
+        }
     }
 
     Button.OnClickListener mClickListener = new View.OnClickListener(){
@@ -87,12 +93,35 @@ public class Fragment_Trimming extends SubMenuFragment {
 
                 case  R.id.btn_handLF:
                     rValue -= cValue;
-                    tv_pitch.setText("ROLL TRIM     " + dformat.format(rValue));
+                    tv_roll.setText("ROLL TRIM     " + dformat.format(rValue));
                     break;
 
                 case  R.id.btn_handRG:
                     rValue += cValue;
-                    tv_pitch.setText("ROLL TRIM     " + dformat.format(rValue));
+                    tv_roll.setText("ROLL TRIM     " + dformat.format(rValue));
+                    break;
+
+            }
+        }
+    };
+
+    Button.OnClickListener mClickListener1 = new View.OnClickListener(){
+
+        @Override
+        public void onClick(View v) {
+
+            switch (v.getId()){
+
+                case  R.id.radio_value1:
+                    cValue = 0.05;
+                    break;
+
+                case  R.id.radio_value2:
+                    cValue = 0.1;
+                    break;
+
+                case  R.id.radio_value3:
+                    cValue = 0.5;
                     break;
 
             }

@@ -119,6 +119,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorWhite"
+                    android:checked="true"
                     android:text="0.05"
                     android:paddingRight="15dp"/>
 
@@ -152,7 +153,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:text="PITCH TRIM     -1.2"
+                android:text="PITCH TRIM     1.2"
                 android:layout_weight="1"/>
         </LinearLayout>
 
