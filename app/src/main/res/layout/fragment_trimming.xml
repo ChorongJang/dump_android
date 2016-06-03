@@ -4,7 +4,6 @@
     style="@style/FragmentFrame"
     android:orientation="vertical"
     android:weightSum="4"
-    android:background="#05ff00"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <LinearLayout
@@ -108,10 +107,12 @@
                 android:text="미세 조정 단위" />
 
             <RadioGroup
+                android:padding="5dp"
+                android:layout_marginBottom="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:background="#898d8b">
 
                 <RadioButton
                     android:id="@+id/radio_value1"
@@ -143,7 +144,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:text="test"
+                android:text="ROLL TRIM     0.5"
                 android:layout_weight="1"/>
 
             <TextView
@@ -151,7 +152,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:text="test"
+                android:text="PITCH TRIM     -1.2"
                 android:layout_weight="1"/>
         </LinearLayout>
 

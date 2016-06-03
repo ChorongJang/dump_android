@@ -14,12 +14,18 @@ import com.example.dron.Component.SubMenuFragment;
 import com.example.dron.R;
 
 import java.sql.BatchUpdateException;
+import java.text.DecimalFormat;
 
 public class Fragment_Trimming extends SubMenuFragment {
 
     RadioButton[] radio_trim;
     TextView tv_roll, tv_pitch;
     Button[] btn_hand;
+
+    String patten = "#####.##";
+    DecimalFormat dformat = new DecimalFormat(patten);
+
+    double cValue = 0.05, pValue = 0.5, rValue = 1.2;
 
     @Nullable
     @Override
@@ -54,7 +60,45 @@ public class Fragment_Trimming extends SubMenuFragment {
             }
         });
 
+        for (Button b:btn_hand) {
+
+            b.setOnClickListener(mClickListener);
+
+        }
     }
+
+    Button.OnClickListener mClickListener = new View.OnClickListener(){
+
+        @Override
+        public void onClick(View v) {
+
+            switch (v.getId()){
+
+                case  R.id.btn_handUP:
+                    pValue += cValue;
+                    tv_pitch.setText("PITCH TRIM     " + dformat.format(pValue));
+
+                    break;
+
+                case  R.id.btn_handDW:
+                    pValue -= cValue;
+                    tv_pitch.setText("PITCH TRIM     " + dformat.format(pValue));
+                    break;
+
+                case  R.id.btn_handLF:
+                    rValue -= cValue;
+                    tv_pitch.setText("ROLL TRIM     " + dformat.format(rValue));
+                    break;
+
+                case  R.id.btn_handRG:
+                    rValue += cValue;
+                    tv_pitch.setText("ROLL TRIM     " + dformat.format(rValue));
+                    break;
+
+
+            }
+        }
+    };
 
 
 

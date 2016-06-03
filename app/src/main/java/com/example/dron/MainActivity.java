@@ -57,6 +57,66 @@ public class MainActivity extends AppCompatActivity {
 
     Timer nTimer;
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_main);
+
+        mContext = this;
+
+        if (mBluetoothLeService != null) {
+            final boolean result = mBluetoothLeService.connect(Fragment_Bluetooth.mDeviceAddress);
+            Log.d("연결결과는", "Connect request result=" + result);
+        }
+
+        setDronestate();
+        initView();
+    }
+
+    @Override
+    protected void onResume(){
+        this.overridePendingTransition(0, 0);
+        super.onResume();
+
+        //블루투스 연결되었을 때(드론과 연결 되었을 때)만 작업을 수행하도록 함
+        if(Fragment_Bluetooth.mDeviceAddress != null)  setSendDataTask();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //블루투스 연결되었을 때(드론과 연결 되었을 때)만 작업을 수행하도록 함
+        if(Fragment_Bluetooth.mDeviceAddress != null) nTimer.cancel();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        drone.saveDroneState();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        // issue : destroy 할때 연결된 디바이스 값도 초기화 해줘야함, 종료했다가 다시 실행시 바로 연결 됨
+
+        try {
+            unregisterReceiver(mGattUpdateReceiver);
+            unbindService(mServiceConnection);
+        }catch (Exception e){
+            Log.e("destroy","error");
+        }
+        mBluetoothLeService = null;
+        Fragment_Bluetooth.mDeviceName = null;
+        Fragment_Bluetooth.mDeviceAddress = null;
+
+        //블루투스 연결되었을 때(드론과 연결 되었을 때)만 작업을 수행하도록 함
+        if(Fragment_Bluetooth.mDeviceAddress != null) nTimer.cancel();
+    }
+
+
     ///////블루투스////////
     public static BluetoothLeService mBluetoothLeService;
     private ArrayList<ArrayList<BluetoothGattCharacteristic>> mGattCharacteristics = new ArrayList<ArrayList<BluetoothGattCharacteristic>>();
@@ -194,23 +254,24 @@ public class MainActivity extends AppCompatActivity {
         return mWritableCharacteristics.size();
     }
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_main);
-
-        mContext = this;
-
-        if (mBluetoothLeService != null) {
-            final boolean result = mBluetoothLeService.connect(Fragment_Bluetooth.mDeviceAddress);
-            Log.d("연결결과는", "Connect request result=" + result);
-        }
-
-        setDronestate();
-        initView();
+    private String GetDevicesUUID(Context mContext){
+        final TelephonyManager tm = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
+        final String tmDevice, tmSerial, androidId;
+        tmDevice = "" + tm.getDeviceId();
+        tmSerial = "" + tm.getSimSerialNumber();
+        androidId = "" + android.provider.Settings.Secure.getString(getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
+        UUID deviceUuid = new UUID(androidId.hashCode(), ((long)tmDevice.hashCode() << 32) | tmSerial.hashCode());
+        String deviceId = deviceUuid.toString();
+        return deviceId;
     }
+
+    public void registerble(){
+
+        Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
+        bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
+        registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
+    }
+
 
     public void setDronestate(){
 
@@ -223,58 +284,26 @@ public class MainActivity extends AppCompatActivity {
         drone.getJoystickMode();
     }
 
-    public void registerble(){
+    private void initView(){
 
-        Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
-        bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
-       registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
+        indicator = new DronIndicator(this);
+        btn_conn = (Button) findViewById(R.id.btn_conn);
+        btn_setting = (Button) findViewById(R.id.btn_setting);
+
+        initJoyStick();
+        setBtnEvent();
+        indicator.setDronIndicator("35KM/H", "3", "N38.26 E134.23");
     }
 
-    public void disconnectDevice(){
+    private void initJoyStick(){
 
+        layout_js_left = (RelativeLayout)findViewById(R.id.joystick_left);
+        layout_js_right = (RelativeLayout)findViewById(R.id.joystick_right);
 
-    }
+        js_left = new View_JoyStick(getApplicationContext(), layout_js_left, R.drawable.image_button);
+        js_right = new View_JoyStick(getApplicationContext(), layout_js_right, R.drawable.image_button);
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        //블루투스 연결되었을 때(드론과 연결 되었을 때)만 작업을 수행하도록 함
-        if(Fragment_Bluetooth.mDeviceAddress != null) nTimer.cancel();
-    }
-
-    @Override
-    protected void onResume(){
-        this.overridePendingTransition(0, 0);
-        super.onResume();
-
-        //블루투스 연결되었을 때(드론과 연결 되었을 때)만 작업을 수행하도록 함
-        if(Fragment_Bluetooth.mDeviceAddress != null)  setSendDataTask();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        drone.saveDroneState();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        // issue : destroy 할때 연결된 디바이스 값도 초기화 해줘야함, 종료했다가 다시 실행시 바로 연결 됨
-
-        try {
-            unregisterReceiver(mGattUpdateReceiver);
-            unbindService(mServiceConnection);
-        }catch (Exception e){
-            Log.e("destroy","error");
-        }
-        mBluetoothLeService = null;
-        Fragment_Bluetooth.mDeviceName = null;
-        Fragment_Bluetooth.mDeviceAddress = null;
-
-        //블루투스 연결되었을 때(드론과 연결 되었을 때)만 작업을 수행하도록 함
-        if(Fragment_Bluetooth.mDeviceAddress != null) nTimer.cancel();
+        setJoyStick();
     }
 
     private void setJoyStick(){
@@ -308,34 +337,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void initView(){
-
-        indicator = new DronIndicator(this);
-        btn_conn = (Button) findViewById(R.id.btn_conn);
-        btn_setting = (Button) findViewById(R.id.btn_setting);
-
-        initJoyStick();
-        setBtnEvent();
-        indicator.setDronIndicator("35KM/H", "3", "N38.26 E134.23");
-    }
-
     private void setSendDataTask(){
         DroneTask droneTask = new DroneTask();
         nTimer = new Timer();
         nTimer.schedule(droneTask, 500, 100);
     }
-
-    private void initJoyStick(){
-
-        layout_js_left = (RelativeLayout)findViewById(R.id.joystick_left);
-        layout_js_right = (RelativeLayout)findViewById(R.id.joystick_right);
-
-        js_left = new View_JoyStick(getApplicationContext(), layout_js_left, R.drawable.image_button);
-        js_right = new View_JoyStick(getApplicationContext(), layout_js_right, R.drawable.image_button);
-
-        setJoyStick();
-    }
-
 
     private void setBtnEvent() {
         btn_conn.setOnClickListener(new View.OnClickListener() {
@@ -381,18 +387,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-    private String GetDevicesUUID(Context mContext){
-        final TelephonyManager tm = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
-        final String tmDevice, tmSerial, androidId;
-        tmDevice = "" + tm.getDeviceId();
-        tmSerial = "" + tm.getSimSerialNumber();
-        androidId = "" + android.provider.Settings.Secure.getString(getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
-        UUID deviceUuid = new UUID(androidId.hashCode(), ((long)tmDevice.hashCode() << 32) | tmSerial.hashCode());
-        String deviceId = deviceUuid.toString();
-        return deviceId;
-    }
-
 
     public void setJoystickMode(boolean _mode){
 
