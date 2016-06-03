@@ -41,6 +41,8 @@ public class Fragment_Bluetooth extends SubMenuFragment {
     private Handler mHandler;   //핸들러
     public static String mDeviceName;           //검색 후 리스트뷰 한개 선택 시 기기이름저장
     public static String mDeviceAddress = null;    //검색 후 리스트뷰 한개 선택 시 기기주소저장
+    private TextView tv_deviceName;  //텍스트뷰에 나타낼 블루투스 id값
+    private TextView tv_deviceAddress;  //텍스트뷰에 나타낼 블루투스 PIN값
 
     private static final int REQUEST_ENABLE_BT = 1;             //블루투스가 가능한지 나타내는 static함수
     // Stops scanning after 10 seconds.
@@ -74,6 +76,10 @@ public class Fragment_Bluetooth extends SubMenuFragment {
             Toast.makeText(getActivity(), "본 기기는 블루투스를 지원하지 않습니다.", Toast.LENGTH_SHORT).show();
             return;
         }
+        tv_deviceName = (TextView) v.findViewById(R.id.tv_bluetooth_id);
+        tv_deviceAddress = (TextView) v.findViewById(R.id.tv_bluetooth_pin);
+        tv_deviceName.setText(mDeviceName);
+        tv_deviceAddress.setText(mDeviceAddress);
         mHandler = new Handler();
         mLeDeviceListAdapter = new LeDeviceListAdapter();
         ListView list = (ListView)v.findViewById(R.id.listView);
@@ -98,6 +104,8 @@ public class Fragment_Bluetooth extends SubMenuFragment {
                 MainActivity.mBluetoothLeService.connect(mDeviceAddress);
                 Log.d(mDeviceName, "연결오케이");
                 Toast.makeText(getActivity(), "연결되었습니다", Toast.LENGTH_SHORT).show();
+                tv_deviceName.setText(mDeviceName);
+                tv_deviceAddress.setText(mDeviceAddress);
                 //리스트뷰 초기화
                 mLeDeviceListAdapter.clear();
                 btn_bluetooth_search.setText("블루투스 검색");

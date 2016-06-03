@@ -2,27 +2,79 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout_bluetooth"
-    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/menuBackground"
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/tv_bluetooth_des"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="드론과 블루투스를 연결하는 메뉴입니다. 본 앱은 블루투스 4.0 이상버전을 지원하며 (주)에어로다인 제품 외에 사용 시 올바르게 동작하지 않을 수 있습니다."
-        android:id="@+id/tv_bluetooth_des" />
+        android:text="드론과 블루투스를 연결하는 메뉴입니다. 본 앱은 블루투스 4.0 이상버전을 지원하며 (주)에어로다인 제품 외에 사용 시 올바르게 동작하지 않을 수 있습니다." />
 
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="블루투스 검색"
-        android:id="@+id/btn_bluetooth_search" />
+        android:weightSum="9"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_bluetooth_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="블루투스 검색" />
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="right"
+            android:layout_weight="3">
+
+            <TextView
+                android:id="@+id/tv_bluetooth_basic_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="기본 ID" />
+
+            <TextView
+                android:id="@+id/tv_bluetooth_basic_pin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="기본 PIN" />
+
+        </LinearLayout>
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="right"
+            android:layout_weight="4">
+
+            <TextView
+                android:id="@+id/tv_bluetooth_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/tv_bluetooth_pin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <ListView
+        android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/darker_gray"
-        android:id="@+id/listView" />
+        android:background="@android:color/darker_gray" />
 
 
 </LinearLayout>
