@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //BLE를 지원하지 않는 기기라면 토스트창 안내 후 종료시킨다.
         if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
-            Toast.makeText(this, "본 기기는 BLE를 지원하지 않습니다.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "본 기기는 BLE를 지원하지 않습니다. 죄송합니다.", Toast.LENGTH_SHORT).show();
             finish();
         }
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
