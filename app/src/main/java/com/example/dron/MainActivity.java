@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -22,6 +23,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.dron.Component.DronIndicator;
 import com.example.dron.Component.View_JoyStick;
@@ -49,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     DronIndicator indicator;
     Button btn_conn;
     Button btn_setting;
+    Button btn_start;
 
     RelativeLayout layout_js_left, layout_js_right;
     View_JoyStick js_left, js_right;
@@ -60,6 +63,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //BLE를 지원하지 않는 기기라면 토스트창 안내 후 종료시킨다.
+        if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
+            Toast.makeText(this, "본 기기는 BLE를 지원하지 않습니다.", Toast.LENGTH_SHORT).show();
+            finish();
+        }
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
@@ -291,6 +299,7 @@ public class MainActivity extends AppCompatActivity {
         indicator = new DronIndicator(this);
         btn_conn = (Button) findViewById(R.id.btn_conn);
         btn_setting = (Button) findViewById(R.id.btn_setting);
+        btn_start = (Button) findViewById(R.id.btn_start);
 
         initJoyStick();
         setBtnEvent();
@@ -390,6 +399,14 @@ public class MainActivity extends AppCompatActivity {
                     btn_setting.setBackgroundResource(R.drawable.setting);
                 }
                 return false;
+            }
+        });
+
+        btn_start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(btn_start.getText().toString().equals("START")) btn_start.setText("STOP");
+                else if(btn_start.getText().toString().equals("STOP")) btn_start.setText("START");
             }
         });
     }
