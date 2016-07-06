@@ -52,10 +52,6 @@ public class ConnectingActivity extends AppCompatActivity implements Fragment_Co
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        //권한을 갖고 있는지 점검하는 코드(마시멜로버전이상을 위한 코드임)
-        int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
-
         // BluetoothService 클래스 생성
         ((MainActivity)MainActivity.mContext).registerble();
         manager = getFragmentManager();
@@ -63,29 +59,6 @@ public class ConnectingActivity extends AppCompatActivity implements Fragment_Co
         initComponent();
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case 1: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                    // permission was granted, yay! Do the
-                    // contacts-related task you need to do.
-
-                } else {
-
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                }
-                return;
-            }
-
-            // other 'case' lines to check for other
-            // permissions this app might request
-        }
-    }
 
     //애니메이션 효과 없애기
     @Override

@@ -7,8 +7,11 @@ import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,6 +48,7 @@ public class Fragment_Bluetooth extends SubMenuFragment {
     private TextView tv_deviceAddress;  //텍스트뷰에 나타낼 블루투스 PIN값
 
     private static final int REQUEST_ENABLE_BT = 1;             //블루투스가 가능한지 나타내는 static함수
+    private static final int REQUEST_ENABLE_GPS = 2;
     // Stops scanning after 10 seconds.
     private static final long SCAN_PERIOD = 10000;               //10초동안 검색하게 함
 
@@ -66,6 +70,15 @@ public class Fragment_Bluetooth extends SubMenuFragment {
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
             //Toast.makeText(getActivity(), "Bluetooth가 실행안되어있다", Toast.LENGTH_SHORT).show();
+        }
+        //GPS가 꺼져있으면 GPS를 킬 것인가를 묻는다.
+        LocationManager locationManager = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
+        if(!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+            //롤리팝 이상이면 gps를 켜야한다.
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+                Intent enableLocationIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivityForResult(enableLocationIntent, REQUEST_ENABLE_GPS);
+            }
         }
         //BLE를 지원하지 않는 기기라면 토스트창 안내 후 종료시킨다.
         if (!getActivity().getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
@@ -136,7 +149,9 @@ public class Fragment_Bluetooth extends SubMenuFragment {
                         scanLeDevice(false);
                     }
                 }
-                else{ Toast.makeText(getActivity(), "블루투스를 작동시켜주세요", Toast.LENGTH_SHORT).show();}
+                else{
+                    Toast.makeText(getActivity(), "블루투스를 작동시켜주세요", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -153,8 +168,12 @@ public class Fragment_Bluetooth extends SubMenuFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.d("블루투스 연결시도","연결하겠다");
+        Log.d("GPS 연결시도","연결하겠다");
         // User chose not to enable Bluetooth.
         if (requestCode == REQUEST_ENABLE_BT && resultCode == Activity.RESULT_CANCELED) {
+            return;
+        }
+        else if(requestCode == REQUEST_ENABLE_GPS && resultCode == Activity.RESULT_CANCELED){
             return;
         }
         super.onActivityResult(requestCode, resultCode, data);

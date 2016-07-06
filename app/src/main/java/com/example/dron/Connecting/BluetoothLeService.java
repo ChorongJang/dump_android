@@ -34,6 +34,8 @@ import android.os.IBinder;
 import android.util.Log;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.URLEncoder;
 import java.util.List;
 
@@ -229,6 +231,7 @@ public class BluetoothLeService extends Service {
 		// We want to directly connect to the device, so we are setting the
 		// autoConnect
 		// parameter to false.
+
 		mBluetoothGatt = device.connectGatt(this, false, mGattCallback);
 		Log.d(TAG, "Trying to create a new connection.");
 		mBluetoothDeviceAddress = address;

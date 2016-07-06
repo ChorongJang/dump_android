@@ -1,5 +1,6 @@
 package com.example.dron;
 
+import android.Manifest;
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattService;
@@ -14,6 +15,9 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -63,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         //BLE를 지원하지 않는 기기라면 토스트창 안내 후 종료시킨다.
         if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
             Toast.makeText(this, "본 기기는 BLE를 지원하지 않습니다. 죄송합니다.", Toast.LENGTH_SHORT).show();
@@ -73,6 +78,25 @@ public class MainActivity extends AppCompatActivity {
 
         mContext = this;
 
+        // 갤러리 사용 권한 체크( 사용권한이 없을경우 -1 )
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION ) != PackageManager.PERMISSION_GRANTED) {
+            // 권한이 없을경우
+
+            // 최초 권한 요청인지, 혹은 사용자에 의한 재요청인지 확인
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_COARSE_LOCATION )) {
+                // 사용자가 임의로 권한을 취소시킨 경우
+                // 권한 재요청
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION }, 1);
+
+            } else {
+                // 최초로 권한을 요청하는 경우(첫실행)
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION }, 1);
+            }
+        }else {
+            // 사용 권한이 있음을 확인한 경우
+            //initLayout();
+        }
+
         if (mBluetoothLeService != null) {
             final boolean result = mBluetoothLeService.connect(Fragment_Bluetooth.mDeviceAddress);
             Log.d("연결결과는", "Connect request result=" + result);
@@ -80,6 +104,26 @@ public class MainActivity extends AppCompatActivity {
 
         setDronestate();
         initView();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 1: {
+                // 갤러리 사용권한에 대한 콜백을 받음
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // 권한 동의 버튼 선택
+                    //initLayout();
+                } else {
+                    // 사용자가 권한 동의를 안함
+                    // 권한 동의안함 버튼 선택
+                    Toast.makeText(MainActivity.this , "권한사용을 동의해주셔야 이용이 가능합니다." , Toast.LENGTH_LONG ).show();
+                    finish();
+                }
+                return;
+            }
+            // 예외케이스
+        }
     }
 
     @Override
