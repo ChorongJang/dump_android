@@ -12,6 +12,7 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -78,23 +79,27 @@ public class MainActivity extends AppCompatActivity {
 
         mContext = this;
 
-        // 갤러리 사용 권한 체크( 사용권한이 없을경우 -1 )
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION ) != PackageManager.PERMISSION_GRANTED) {
-            // 권한이 없을경우
+        //롤리팝이상이면 권한물어봄
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
-            // 최초 권한 요청인지, 혹은 사용자에 의한 재요청인지 확인
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_COARSE_LOCATION )) {
-                // 사용자가 임의로 권한을 취소시킨 경우
-                // 권한 재요청
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION }, 1);
+            // 블루투스 사용 권한 체크( 사용권한이 없을경우 -1 )
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // 권한이 없을경우
 
+                // 최초 권한 요청인지, 혹은 사용자에 의한 재요청인지 확인
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                    // 사용자가 임의로 권한을 취소시킨 경우
+                    // 권한 재요청
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+
+                } else {
+                    // 최초로 권한을 요청하는 경우(첫실행)
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+                }
             } else {
-                // 최초로 권한을 요청하는 경우(첫실행)
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION }, 1);
+                // 사용 권한이 있음을 확인한 경우
+                //initLayout();
             }
-        }else {
-            // 사용 권한이 있음을 확인한 경우
-            //initLayout();
         }
 
         if (mBluetoothLeService != null) {
