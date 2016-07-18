@@ -62,6 +62,13 @@ public class MainActivity extends AppCompatActivity {
     View_JoyStick js_left, js_right;
 
     static public boolean joystick_mode;
+    int[] joystick = {
+            R.drawable.controller_left,
+            R.drawable.controller_right,
+            R.drawable.controller_right
+    };
+
+    ImageView[] iv_joystick;
 
     Timer nTimer, tTimer;
 
@@ -138,6 +145,8 @@ public class MainActivity extends AppCompatActivity {
 
         //블루투스 연결되었을 때(드론과 연결 되었을 때)만 작업을 수행하도록 함
         if (Fragment_Bluetooth.mDeviceAddress != null) setSendDataTask();
+
+        setJoystickMode(drone.getJoystickMode());
     }
 
     @Override
@@ -340,7 +349,7 @@ public class MainActivity extends AppCompatActivity {
         mPref = getSharedPreferences(sfName, 0);
         drone = new DroneState(mPref);
 
-        drone.getJoystickMode();
+
     }
 
     private void initView() {
@@ -360,6 +369,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initJoyStick() {
+
+        iv_joystick = new ImageView[2];
+
+        iv_joystick[0] = (ImageView) findViewById(R.id.img_contLeft);
+        iv_joystick[1] = (ImageView) findViewById(R.id.img_contRight);
 
         layout_js_left = (RelativeLayout) findViewById(R.id.joystick_left);
         layout_js_right = (RelativeLayout) findViewById(R.id.joystick_right);
@@ -460,21 +474,25 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void setJoystickMode(boolean _mode) {
+    public void setJoystickMode(int _mode) {
 
-        ImageView img_right = (ImageView) this.findViewById(R.id.img_contRight);
-        ImageView img_left = (ImageView) this.findViewById(R.id.img_contRight);
+        switch (_mode){
+            case 0 :
+                iv_joystick[0].setImageResource(joystick[0]);
+                iv_joystick[1].setImageResource(joystick[0]);
+                break;
 
-        joystick_mode = _mode;
+            case 1 :
+                iv_joystick[0].setImageResource(joystick[0]);
+                iv_joystick[1].setImageResource(joystick[1]);
+                break;
 
-        if (joystick_mode) {
-            img_right.setImageResource(R.drawable.controller_right);
-            img_left.setImageResource(R.drawable.controller_left);
-        } else {
 
-            img_right.setImageResource(R.drawable.controller_left);
-            img_left.setImageResource(R.drawable.controller_right);
+            case 2 :
+                iv_joystick[0].setImageResource(joystick[1]);
+                iv_joystick[1].setImageResource(joystick[0]);
 
+                break;
         }
     }
 
