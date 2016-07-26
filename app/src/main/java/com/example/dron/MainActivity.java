@@ -12,6 +12,7 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,6 +29,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dron.Component.DronIndicator;
@@ -57,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
     Button btn_conn;
     Button btn_setting;
     Button btn_start;
+    TextView gpsText;
 
     RelativeLayout layout_js_left, layout_js_right;
     View_JoyStick js_left, js_right;
@@ -71,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView[] iv_joystick;
 
     Timer nTimer, tTimer;
+    LocationManager locationManager;  //GPS체크
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,6 +146,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         this.overridePendingTransition(0, 0);
         super.onResume();
+        locationManager = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
+        if(!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+            gpsText.setText("OFF");
+        }else gpsText.setText("ON");
 
         //블루투스 연결되었을 때(드론과 연결 되었을 때)만 작업을 수행하도록 함
         if (Fragment_Bluetooth.mDeviceAddress != null) setSendDataTask();
@@ -358,6 +366,7 @@ public class MainActivity extends AppCompatActivity {
         btn_conn = (Button) findViewById(R.id.btn_conn);
         btn_setting = (Button) findViewById(R.id.btn_setting);
         btn_start = (Button) findViewById(R.id.btn_start);
+        gpsText = (TextView) findViewById(R.id.gpsText);
 
         initJoyStick();
         setBtnEvent();
