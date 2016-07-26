@@ -361,8 +361,8 @@ public class MainActivity extends AppCompatActivity {
 
         initJoyStick();
         setBtnEvent();
-        indicator.setDronIndicator("35KM/H", "3", "N38.26 E134.23");
-
+//        indicator.setDronIndicator("35KM/H", "3", "N38.26 E134.23");
+        indicator.setDronIndicator("-", "3", "-");
         TimeTask timeTask = new TimeTask();
         tTimer = new Timer();
         tTimer.schedule(timeTask, 500, 100);
