@@ -74,8 +74,8 @@ public class Fragment_Bluetooth extends SubMenuFragment {
         //GPS가 꺼져있으면 GPS를 킬 것인가를 묻는다.
         LocationManager locationManager = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
         if(!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
-            //롤리팝 이상이면 gps를 켜야한다.
-            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            //마시멜로 이상이면 gps를 켜야한다.
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                 Intent enableLocationIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 startActivityForResult(enableLocationIntent, REQUEST_ENABLE_GPS);
             }
