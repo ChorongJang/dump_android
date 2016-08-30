@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
         mContext = this;
 
-        //롤리팝이상이면 권한물어봄
+        //마시멜로이상이면 권한물어봄
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
             // 블루투스 사용 권한 체크( 사용권한이 없을경우 -1 )
