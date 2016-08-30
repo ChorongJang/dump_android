@@ -24,7 +24,6 @@ public class Fragment_JoystickSetting extends SubMenuFragment {
 
     int[] joystick = {
             R.drawable.controller_left,
-            R.drawable.controller_right,
             R.drawable.controller_right
     };
 
@@ -47,11 +46,10 @@ public class Fragment_JoystickSetting extends SubMenuFragment {
         tv_jmode = (TextView) v.findViewById(R.id.tv_jmode);
         tog_jmode[0] = (ToggleButton) v.findViewById(R.id.tog_jmode1);
         tog_jmode[1] = (ToggleButton) v.findViewById(R.id.tog_jmode2);
-        tog_jmode[2] = (ToggleButton) v.findViewById(R.id.tog_jmode3);
         img_jmode[0] = (ImageView) v.findViewById(R.id.img_jmodeL);
         img_jmode[1] = (ImageView) v.findViewById(R.id.img_jmodeR);
 
-        for(int i=0; i<3; i++) {
+        for(int i=0; i<2; i++) {
             tog_jmode[i].setOnClickListener(mClickListner);
         }
 
@@ -64,23 +62,15 @@ public class Fragment_JoystickSetting extends SubMenuFragment {
 
             switch (v.getId()){
                 case R.id.tog_jmode1 :
-                    setToggMode(0, 1, 2);
-                    img_jmode[0].setImageResource(joystick[0]);
-                    img_jmode[1].setImageResource(joystick[0]);
-                    break;
-
-                case R.id.tog_jmode2 :
-                    setToggMode(1,0,2);
+                    setToggMode(0, 1);
                     img_jmode[0].setImageResource(joystick[0]);
                     img_jmode[1].setImageResource(joystick[1]);
                     break;
 
-
-                case R.id.tog_jmode3 :
-                    setToggMode(2, 0, 1);
+                case R.id.tog_jmode2 :
+                    setToggMode(1,0);
                     img_jmode[0].setImageResource(joystick[1]);
                     img_jmode[1].setImageResource(joystick[0]);
-
                     break;
             }
 
@@ -88,13 +78,12 @@ public class Fragment_JoystickSetting extends SubMenuFragment {
 
     };
 
-    void setToggMode(int _s, int _m, int _n){
+    void setToggMode(int _s, int _m){
 
         MainActivity.drone.setJoystickMode(_s);
 
         tog_jmode[_s].setChecked(true);
         tog_jmode[_m].setChecked(false);
-        tog_jmode[_n].setChecked(false);
 
         tv_jmode.setText("모드 " + (_s+1));
     }

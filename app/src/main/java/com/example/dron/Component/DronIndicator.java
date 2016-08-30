@@ -40,7 +40,7 @@ public class DronIndicator {
     public void setCurrentTime(){
         SimpleDateFormat sdfNow = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String strResult = sdfNow.format(new Date(System.currentTimeMillis()));
-        Log.d("timt",strResult);
+        //Log.d("timt",strResult);
         dateText.setText(strResult);
     }
 

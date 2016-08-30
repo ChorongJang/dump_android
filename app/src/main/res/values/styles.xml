@@ -26,9 +26,6 @@
     <style name="Layout_joystick" >
         <item name="android:background">#00FF0000</item>
         <item name="android:layout_alignParentBottom">true</item>
-        <item name="android:layout_marginRight">40dp</item>
-        <item name="android:layout_marginLeft">40dp</item>
-        <item name="android:layout_marginBottom">40dp</item>
     </style>
 
     <style name="Layout_mainBtn" >
