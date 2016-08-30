@@ -16,7 +16,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
-import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -52,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     int StartByte = 0xC9, EndByte = 0xCA;
 
     int rStartByte = 0xCB;
+    boolean isStart = false;
 
     DronIndicator indicator;
     Button btn_conn;
@@ -76,11 +76,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        /*
         //BLE를 지원하지 않는 기기라면 토스트창 안내 후 종료시킨다.
         if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
             Toast.makeText(this, "본 기기는 BLE를 지원하지 않습니다. 죄송합니다.", Toast.LENGTH_SHORT).show();
             finish();
-        }
+        }*/
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
@@ -396,6 +398,34 @@ public class MainActivity extends AppCompatActivity {
 
         layout_js_left.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View arg0, MotionEvent arg1) {
+
+/*
+                if(arg1.getAction() == MotionEvent.ACTION_DOWN ) {
+
+                    int currentX, currentY;
+                    RelativeLayout.LayoutParams plControl = (RelativeLayout.LayoutParams) layout_js_left.getLayoutParams();
+
+                    currentX = plControl.leftMargin;
+                    currentY = plControl.bottomMargin;
+
+                    float x = arg1.getRawX();
+                    float y = arg1.getRawY();
+                        Log.d("절대 좌표 ", x + "  " + y);
+
+                    // x = arg1.getX();
+                    // y = arg1.getY();
+                    //Log.d("상대 좌표 ", x + "  " + y);
+
+                    Log.d("이전 마진", plControl.leftMargin + "  " + plControl.topMargin );
+                    plControl.leftMargin = (int) x - 150;
+                    plControl.topMargin = (int)y - 150;
+                    //plControl.bottomMargin = 0;
+
+                    Log.d("이후 좌표 ", plControl.leftMargin + "  " + plControl.topMargin);
+                    layout_js_left.setLayoutParams(plControl);
+
+                }*/
+
                 js_left.drawStick(arg1);
                 return true;
             }
@@ -407,12 +437,37 @@ public class MainActivity extends AppCompatActivity {
         js_right.setOffset(90);
         js_right.setMinimumDistance(50);
 
+
         layout_js_right.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View arg0, MotionEvent arg1) {
+
+                if(arg1.getAction() == MotionEvent.ACTION_DOWN ) {
+                    float x = arg1.getX();
+                    float y = arg1.getY();
+                    Log.d("좌표 ", x + "  " + y);
+
+                }
+
                 js_right.drawStick(arg1);
                 return true;
             }
         });
+    }
+
+    /* 조이스틱 터치 */
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        super.onTouchEvent(event);
+
+        if(event.getAction() == MotionEvent.ACTION_DOWN ){
+
+            float x = event.getX();
+            float y = event.getY();
+
+            return true;
+        }
+        return false;
     }
 
     private void setSendDataTask() {
@@ -425,9 +480,6 @@ public class MainActivity extends AppCompatActivity {
         btn_conn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Bundle b = new Bundle();
-
                 Intent intent = new Intent(MainActivity.this, ConnectingActivity.class);
                 startActivity(intent);
             }
@@ -468,8 +520,14 @@ public class MainActivity extends AppCompatActivity {
         btn_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(btn_start.getText().toString().equals("START")) btn_start.setText("STOP");
-                else if(btn_start.getText().toString().equals("STOP")) btn_start.setText("START");
+                if (btn_start.getText().toString().equals("START")) {
+                    btn_start.setText("STOP");
+                    isStart = false;
+                }
+                else if (btn_start.getText().toString().equals("STOP")) {
+                    btn_start.setText("START");
+                    isStart = true;
+                }
             }
         });
     }
@@ -479,19 +537,12 @@ public class MainActivity extends AppCompatActivity {
         switch (_mode){
             case 0 :
                 iv_joystick[0].setImageResource(joystick[0]);
-                iv_joystick[1].setImageResource(joystick[0]);
-                break;
-
-            case 1 :
-                iv_joystick[0].setImageResource(joystick[0]);
                 iv_joystick[1].setImageResource(joystick[1]);
                 break;
 
-
-            case 2 :
+            case 1 :
                 iv_joystick[0].setImageResource(joystick[1]);
                 iv_joystick[1].setImageResource(joystick[0]);
-
                 break;
         }
     }
@@ -512,14 +563,34 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void run() {
 
-            if (mBluetoothLeService == null) return;
+            if(mBluetoothLeService == null) return;
+            if(!isStart){
+                sendText = rStartByte + EndByte + "";
+                mBluetoothLeService.write(mDefaultChar,sendText.getBytes());
+                return;
+            }
+
+            int left_x = js_left.getX(), left_y = js_left.getY(),
+                    right_x = js_right.getX(), right_y = js_right.getY();
+
+            if(left_x > 200) left_x = 200;
+            else if(left_x < 0) left_x = 0;
+
+            if(left_y > 200) left_y = 200;
+            else if(left_y < 0) left_y = 0;
+
+            if(right_x > 200) right_x = 200;
+            else if(right_x < 0) right_x = 0;
+
+            if(right_y > 200) right_y = 200;
+            else if(right_y < 0) right_y = 0;
 
             if (MainActivity.joystick_mode) {
-                sendText = StartByte + "," + js_left.getX() + "," + js_left.getY()
-                        + "," + js_right.getX() + "," + js_right.getY() + "," + EndByte;
+                sendText = StartByte + left_x +  left_y
+                        +  right_x + right_y + EndByte +"";
             }
-            sendText = StartByte + "," + js_right.getX() + "," + js_right.getY() +
-                    js_left.getX() + "," + js_left.getY() + "," + "," + EndByte;
+            sendText = StartByte + right_x + right_y
+                    + left_x + left_y + EndByte+ "" ;
 
 
         Log.d("보내는 메시지는:",sendText);

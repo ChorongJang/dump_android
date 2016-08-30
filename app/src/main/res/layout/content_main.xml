@@ -31,26 +31,30 @@
     <RelativeLayout
         style="@style/Layout_joystick"
         android:id="@+id/joystick_left"
-        android:layout_width="230dp"
-        android:layout_height="230dp"
-        android:layout_alignParentLeft="true">
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginBottom="40dp">
         <ImageView
             android:id="@+id/img_contLeft"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_alignParentLeft="true"/>
     </RelativeLayout>
 
     <RelativeLayout
         style="@style/Layout_joystick"
         android:id="@+id/joystick_right"
-        android:layout_width="230dp"
-        android:layout_height="230dp"
-        android:layout_alignParentRight="true">
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="40dp"
+        android:layout_marginRight="40dp">
         <ImageView
             android:id="@+id/img_contRight"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_alignParentRight="true"/>
     </RelativeLayout>
 
